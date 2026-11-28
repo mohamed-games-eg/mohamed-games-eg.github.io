@@ -1880,7 +1880,7 @@ function build(sp){
  function bkLabel(){var en=(document.querySelector('.bd-lang.bd-on')||{}).textContent==='English';bk.textContent=en?'Lobby':'\u0627\u0644\u0644\u0648\u0628\u064A';}
  bk.onclick=function(){var m=document.querySelector('.bd-wrap.bd-new');if(m&&m.offsetHeight>0)m.style.display='none';sp.style.display='';window.scrollTo(0,0)};
  setInterval(function(){var m=document.querySelector('.bd-wrap.bd-new'),show=sp.style.display==='none'&&m&&m.offsetHeight>0&&!document.querySelector('.bd-pick');if(show){bkLabel();if(bk.style.display==='none')bk.style.display='block'}else if(bk.style.display!=='none')bk.style.display='none'},500);
- var bl=document.createElement('div');bl.textContent='build 221';bl.style.cssText='position:fixed;right:10px;bottom:6px;font-size:10px;opacity:.28;color:#b8c4e0;z-index:1;pointer-events:none;background:none';document.body.appendChild(bl);bl.style.zIndex='2147483000';
+ var bl=document.createElement('div');bl.textContent='build 222';bl.style.cssText='position:fixed;right:10px;bottom:6px;font-size:10px;opacity:.28;color:#b8c4e0;z-index:1;pointer-events:none;background:none';document.body.appendChild(bl);bl.style.zIndex='2147483000';
  var st2=document.createElement('style');st2.textContent='.bd-splash.nl .bd-topbar{display:none!important}.bd-splash.nl .frp-bar{padding-top:10px!important}body.nl-lobby .bd-modal .bd-setrow:has(#bd-t-dark),body.nl-lobby .bd-modal .bd-setrow:has(.bd-langbar){display:none!important}';document.head.appendChild(st2);
  var inL=false,enterT=0;
  function enBtn(w){return [].slice.call(document.querySelectorAll('.bd-lang')).filter(function(x){return (w==='en')===/English/.test(x.textContent)})[0]}
@@ -3836,12 +3836,14 @@ ITEM.beer_old=function(){var gp=new T.Group();C(.32,.32,.95,M(0x2c3036,60,0x5555
  g.cells=[];for(var k2=0;k2<8;k2++){var sg=new T.Group();var bg_=new T.CylinderGeometry(.17,.17,.4,16);bg_.rotateX(Math.PI/2);var sb=new T.Mesh(bg_,new T.MeshPhongMaterial({color:0xc4161c,shininess:70}));sb.position.z=-.07;var bg2=new T.CylinderGeometry(.19,.19,.15,16);bg2.rotateX(Math.PI/2);var sbase=new T.Mesh(bg2,new T.MeshPhongMaterial({color:0xd4a82e,shininess:90}));sbase.position.z=.2;var hole=new T.Mesh(new T.CircleGeometry(.12,14),new T.MeshBasicMaterial({color:0x000000}));hole.rotation.y=Math.PI;hole.position.z=-.275;hole.rotation.x=0;var rim=new T.Mesh(new T.RingGeometry(.12,.17,16),new T.MeshBasicMaterial({color:0x666666,side:T.DoubleSide}));rim.position.z=-.272;sg.add(sb,sbase,hole,rim);sg.userData={b:sb,s:sbase,h:hole,r:rim};sg.rotation.y=Math.PI/2;sg.position.set(5.65,.9,-1.6+.5125*(k2+.5));sg.visible=false;sg.traverse(function(o){o.castShadow=true});S.add(sg);g.cells.push(sg)}
  /* gun */
  var gun=g.gun=new T.Group();S.add(gun);var steel=M(0x3a3d44,90,0x777777),stk=new T.MeshPhongMaterial({map:woodTex,color:0x9a6a40,shininess:35,specular:0x2a1c10});
- B(2.1,.52,.55,stk,-2.0,-.02,0,gun);B(1.1,.5,.62,steel,-.5,0,0,gun);B(.5,.1,.3,M(0x111111),-.6,.27,0,gun);
+ var sh_=new T.Shape();sh_.moveTo(-3.3,.28);sh_.lineTo(-3.35,-.62);sh_.lineTo(-1.5,-.34);sh_.lineTo(-1.0,-.26);sh_.lineTo(-1.0,.3);sh_.lineTo(-1.8,.34);sh_.lineTo(-3.3,.28);
+ var stGeo=new T.ExtrudeGeometry(sh_,{depth:.5,bevelEnabled:true,bevelThickness:.06,bevelSize:.06,bevelSegments:2});stGeo.translate(0,0,-.25);var stkM=new T.Mesh(stGeo,stk);stkM.castShadow=true;gun.add(stkM);B(.12,.95,.62,M(0x14100c,10),-3.4,-.17,0,gun);
+ var recGeo=new T.CylinderGeometry(.34,.34,1.3,18);recGeo.rotateZ(Math.PI/2);var rec=new T.Mesh(recGeo,M(0x2a2d33,110,0x888888));rec.position.set(-.45,.02,0);rec.scale.set(1,.9,1);rec.castShadow=true;gun.add(rec);B(.55,.06,.3,M(0x050505),-.35,.34,0,gun);B(1.35,.06,.2,M(0x4a4e57,100,0x999999),-.45,.3,.0,gun);
  var bgeo=new T.CylinderGeometry(.17,.17,1,14);bgeo.rotateZ(Math.PI/2);bgeo.translate(.5,0,0);
- var barrel=g.barrel=new T.Mesh(bgeo,steel);barrel.castShadow=true;barrel.position.set(.05,.1,0);gun.add(barrel);
+ var barrel=g.barrel=new T.Mesh(bgeo,M(0x2a2d34,130,0xaaaaaa));barrel.castShadow=true;barrel.position.set(.05,.1,0);gun.add(barrel);
  var tgeo=new T.CylinderGeometry(.12,.12,1,12);tgeo.rotateZ(Math.PI/2);tgeo.translate(.5,0,0);
  var tube=g.tube=new T.Mesh(tgeo,M(0x2e3036,60));tube.castShadow=true;tube.position.set(.05,-.1,0);gun.add(tube);
- g.pump=B(1.1,.3,.5,stk,1.25,-.12,0,gun);for(var gi=0;gi<5;gi++)B(.04,.32,.52,M(0x2a1608),.85+gi*.14,-.12,0,gun);var tg=TR(.2,.025,steel,-.35,-.34,0,gun);tg.rotation.x=Math.PI/2;B(.08,.2,.05,M(0x111111),-.4,-.28,0,gun);B(.12,.08,.5,steel,-1.0,.3,0,gun);B(.07,.18,.07,steel,3.0,.28,0,gun);
+ g.pump=B(1.1,.3,.5,stk,1.25,-.12,0,gun);for(var gi=0;gi<5;gi++)B(.04,.32,.52,M(0x2a1608),.85+gi*.14,-.12,0,gun);var tg=TR(.2,.025,steel,-.35,-.34,0,gun);tg.rotation.x=Math.PI/2;B(.08,.2,.05,M(0x111111),-.4,-.28,0,gun);B(.12,.08,.5,steel,-1.0,.3,0,gun);g.sight=B(.07,.18,.07,steel,3.0,.28,0,gun);for(var cb=0;cb<2;cb++)B(.1,.4,.34,M(0x1c1e22,60),.9+cb*1.5,-.02,0,gun);
  var hint=g.hint=new T.Mesh(new T.PlaneGeometry(7,1.3),new T.MeshBasicMaterial({color:0xfde047,transparent:true,opacity:.15,depthWrite:false}));hint.rotation.x=-Math.PI/2;hint.position.set(.2,-.26,0);gun.add(hint);
  var tip=g.tip=new T.Mesh(bgeo,steel);tip.castShadow=true;tip.visible=false;S.add(tip);
  var hs=g.hsaw=ITEM.saw();hs.scale.set(1.6,1.6,1.6);hs.visible=false;S.add(hs);
@@ -3881,7 +3883,7 @@ function draw3d(t,now){
  else if(g.liftM){S.remove(g.liftM);g.liftM=null;g.liftKey=null}
  /* gun + saw */
  var sawing=FX.saw,e2=sawing?(now-sawing.t0)/1000:0,sawn=sawing?(e2>=1.7):!!(G&&G.sawn);
- var L0=3.0,Lc=2.1;g.barrel.scale.x=sawn?Lc:L0;g.tube.scale.x=sawn?Lc-.3:L0-.3;g.pump.position.x=sawn?1.0:1.25;
+ var L0=3.0,Lc=2.1;g.barrel.scale.x=sawn?Lc:L0;g.tube.scale.x=sawn?Lc-.3:L0-.3;g.pump.position.x=sawn?1.0:1.25;g.sight.position.x=sawn?Lc+.05:3.05;
  var pu=.5+.5*Math.sin(now/300);g.hint.visible=false;g.hint.material.opacity=.1+.12*pu;
  g.gun.updateMatrixWorld(true);
  var ax=new T.Vector3(1,0,0).applyQuaternion(g.gun.quaternion);
@@ -4043,8 +4045,13 @@ function front(t){
   if(FX.aim==='dself'){gx1=HEAD.x+30;gy1=HEAD.y+20}
   var ang=Math.atan2(gy1-gy0,gx1-gx0),len=Math.min(520,Math.hypot(gx1-gx0,gy1-gy0)*.8);
   cx.save();cx.translate(gx0,gy0);cx.rotate(ang);cx.shadowColor='#000';cx.shadowBlur=14;
-  cx.fillStyle='#1b1c20';cx.fillRect(0,-9,len,18);cx.fillStyle='#4b4f56';cx.fillRect(0,-9,len,3);cx.fillStyle='#14151a';cx.fillRect(0,12,len*.7,10);
-  cx.fillStyle='#5a3a1d';cx.fillRect(len*.35,9,len*.28,17);cx.fillStyle='#4a2f19';cx.fillRect(-110,-8,110,26);
+  var wg=cx.createLinearGradient(0,-8,0,40);wg.addColorStop(0,'#8a5630');wg.addColorStop(.5,'#5b3519');wg.addColorStop(1,'#33200f');cx.fillStyle=wg;cx.beginPath();cx.moveTo(-170,-8);cx.lineTo(-176,46);cx.lineTo(-24,30);cx.lineTo(0,-8);cx.closePath();cx.fill();cx.strokeStyle='rgba(0,0,0,.35)';cx.lineWidth=1;for(var wl=0;wl<6;wl++){cx.beginPath();cx.moveTo(-170,-2+wl*8);cx.lineTo(-6,-2+wl*5);cx.stroke()}cx.fillStyle='#14100c';cx.fillRect(-182,-10,8,58);
+ var rg2=cx.createLinearGradient(0,-16,0,18);rg2.addColorStop(0,'#555a63');rg2.addColorStop(.4,'#2c2f35');rg2.addColorStop(1,'#16181c');cx.fillStyle=rg2;cx.fillRect(0,-16,len*.24,34);cx.fillStyle='#050505';cx.fillRect(len*.04,-10,len*.1,9);cx.fillStyle='#3a3d44';cx.fillRect(0,-16,len*.24,3);
+ var bg=cx.createLinearGradient(0,-12,0,8);bg.addColorStop(0,'#15171b');bg.addColorStop(.3,'#7b8089');bg.addColorStop(.55,'#3a3e45');bg.addColorStop(1,'#101216');cx.fillStyle=bg;cx.fillRect(len*.24,-12,len*.76,20);
+ var mg=cx.createLinearGradient(0,10,0,24);mg.addColorStop(0,'#2f3238');mg.addColorStop(.4,'#61666e');mg.addColorStop(1,'#14161a');cx.fillStyle=mg;cx.fillRect(len*.24,10,len*.66,13);
+ cx.fillStyle='#202328';cx.fillRect(len*.52,-13,10,38);cx.fillRect(len*.8,-13,10,38);
+ var pg=cx.createLinearGradient(0,10,0,38);pg.addColorStop(0,'#8a5630');pg.addColorStop(1,'#3a2210');cx.fillStyle=pg;cx.fillRect(len*.34,9,len*.2,26);cx.strokeStyle='rgba(0,0,0,.5)';cx.lineWidth=2;for(var pr=0;pr<7;pr++){cx.beginPath();cx.moveTo(len*.34+pr*len*.028+6,10);cx.lineTo(len*.34+pr*len*.028+6,34);cx.stroke()}
+ cx.fillStyle='#0d0e11';cx.fillRect(len-9,-14,9,24);cx.fillStyle='#8a8f98';cx.fillRect(len-34,-19,5,8);cx.strokeStyle='#1c1e22';cx.lineWidth=4;cx.beginPath();cx.arc(len*.08,26,14,0,3.14);cx.stroke();
   cx.restore()}
  else if(FX.aim==='you'){/* muzzle toward the viewer */
   cx.save();cx.shadowColor='#000';cx.shadowBlur=20;var gg=cx.createRadialGradient(W/2,H-90,10,W/2,H-90,150);gg.addColorStop(0,'#000');gg.addColorStop(.5,'#0a0b0d');gg.addColorStop(.6,'#2a2c31');gg.addColorStop(1,'#050506');cx.fillStyle=gg;cx.beginPath();cx.ellipse(W/2,H-90,140,100,0,0,7);cx.fill();cx.restore()}
