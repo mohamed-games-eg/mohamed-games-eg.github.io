@@ -1880,7 +1880,7 @@ function build(sp){
  function bkLabel(){var en=(document.querySelector('.bd-lang.bd-on')||{}).textContent==='English';bk.textContent=en?'Lobby':'\u0627\u0644\u0644\u0648\u0628\u064A';}
  bk.onclick=function(){var m=document.querySelector('.bd-wrap.bd-new');if(m&&m.offsetHeight>0)m.style.display='none';sp.style.display='';window.scrollTo(0,0)};
  setInterval(function(){var m=document.querySelector('.bd-wrap.bd-new'),show=sp.style.display==='none'&&m&&m.offsetHeight>0&&!document.querySelector('.bd-pick');if(show){bkLabel();if(bk.style.display==='none')bk.style.display='block'}else if(bk.style.display!=='none')bk.style.display='none'},500);
- var bl=document.createElement('div');bl.textContent='build 235';bl.style.cssText='position:fixed;right:10px;bottom:6px;font-size:10px;opacity:.28;color:#b8c4e0;z-index:1;pointer-events:none;background:none';document.body.appendChild(bl);bl.style.zIndex='2147483000';
+ var bl=document.createElement('div');bl.textContent='build 236';bl.style.cssText='position:fixed;right:10px;bottom:6px;font-size:10px;opacity:.28;color:#b8c4e0;z-index:1;pointer-events:none;background:none';document.body.appendChild(bl);bl.style.zIndex='2147483000';
  var st2=document.createElement('style');st2.textContent='.bd-splash.nl .bd-topbar{display:none!important}.bd-splash.nl .frp-bar{padding-top:10px!important}body.nl-lobby .bd-modal .bd-setrow:has(#bd-t-dark),body.nl-lobby .bd-modal .bd-setrow:has(.bd-langbar){display:none!important}';document.head.appendChild(st2);
  var inL=false,enterT=0;
  function enBtn(w){return [].slice.call(document.querySelectorAll('.bd-lang')).filter(function(x){return (w==='en')===/English/.test(x.textContent)})[0]}
@@ -3452,7 +3452,7 @@ async function runGame(){
  newGame();G.st={shots:0,live:0,blank:0,items:0,dealt:0,taken:0,t0:Date.now(),hh:0,gold:0};ARM=false;
  for(var r=START;r<=5;r++){
   G.round=r;FX.gold=0;G.max=[2,2,3,3,4][r-1];for(var iz=0;iz<8;iz++){G.items.p[iz]=null;G.items.d[iz]=null;G.open.p[iz]=false;G.open.d[iz]=false}G.hp.p=G.hp.d=G.max;G.cuff.p=G.cuff.d=0;G.sawn=false;FX.sawn=false;FX.saw=null;
-  setMsg(T_('round',r));FX.banner={t0:performance.now(),text:'ROUND '+r};await sleep(2000);if(!alive)return;
+  if(UI.cam>.01){setCam(0)}setMsg(T_('round',r));FX.banner={t0:performance.now(),text:'ROUND '+r};await sleep(2000);if(!alive)return;
   await loadShells();if(!alive||(NET&&NET.bye))return;
   var turn=NET?(((r%2===1)===NET.host)?'p':'d'):'p',winner=null;
   while(!winner){
@@ -3463,7 +3463,7 @@ async function runGame(){
    turn=res.turn;
    if(G.hp.p<=0)winner='d';else if(G.hp.d<=0)winner='p';
   }
-  if(winner==='d'){G.score.d++;setMsg(T_('rl'));await sleep(1500);if(!alive)return;if(G.score.d>=3){showEnd(false);return}continue}
+  if(winner==='d'){G.score.d++;setMsg(T_('rl'));await sleep(1500);if(!alive)return;if(G.score.d>=3){showEnd(false);return}if(UI.cam>.01)await setCam(0);continue}
   G.score.p++;setMsg(T_('rw'));await sleep(1400);if(!alive)return;
   if(G.score.p>=3){showEnd(true);return}
   if(NET&&NET.bye)return;await reviveDealer();if(!alive)return
